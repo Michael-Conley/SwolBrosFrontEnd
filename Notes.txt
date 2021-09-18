@@ -1,0 +1,90 @@
+when i reload everything clears 
+
+now when i click the log out function it clears local storage there for reseting the page and logging out the user
+
+Mabye re do signInSubmitHandler localStorage.setItem to remember the user logged in untill the logout function is called and it will clear the local storage there 
+
+ {signInData ? (
+                    <div>
+                        <WorkoutModal
+                            setUserGeneratedWorkout={setUserGeneratedWorkout}
+                            userGeneratedWorkout={userGeneratedWorkout}
+                            workoutModalIsOpen={workoutModalIsOpen}
+                            setworkoutModalIsOpen={setworkoutModalIsOpen}
+                            signInData={signInData}
+                            user={user}
+                        />
+
+                        <CardActions>
+                            <Button onClick={() => {
+                                setworkoutModalIsOpen(true)
+                                console.log("I added something to workout model")
+                            }} size="small">Add New Work</Button>
+                        </CardActions>
+                        
+                        <Grid className={classes.gridContainer} container direction="row" spacing={3} >
+                            {workOutUserData && workOutUserData.map((workoutData, index) => {
+                                return (
+                                    <Grid item direction="row" sm={4}>
+                                        <WorkOutCard
+                                            workoutData={workoutData}
+                                            signInData={signInData}
+                                            index={index}
+                                            setUserWorkoutData={setUserWorkoutData}
+                                            userGeneratedWorkout={userGeneratedWorkout}
+                                            setUserGeneratedWorkout={setUserGeneratedWorkout}
+                                            setworkoutModalIsOpen={setworkoutModalIsOpen}
+                                            setdeleteWorkoutClicked={setdeleteWorkoutClicked}
+                                        />
+                                    </Grid>
+                                )
+                            })}
+                            {/* </div> */}
+                        </Grid>
+                    </div>
+                ) : (
+                    <div> go log in </div>
+                )}
+
+            <TabPanel value={value} index={2}>
+                {signInData ? (
+                    <div>
+                        <DietModal
+                            setUserGeneratedDiets={setUserGeneratedDiets}
+                            userGeneratedDiets={userGeneratedDiets}
+                            dietModalIsOpen={dietModalIsOpen}
+                            setdietModalIsOpen={setdietModalIsOpen}
+                            signInData={signInData}
+                            user={user}
+                        />
+                        <CardActions>
+                            <Button onClick={() => {
+                                setdietModalIsOpen(true)
+                                console.log("I added something to the diet model")
+                            }} size="small">Add New Diet</Button>
+                        </CardActions>
+                        <Grid className={classes.gridContainer} container direction="row" spacing={3} >
+                            {userDietData ? userDietData.map((userDiets, index) => {
+                                return (
+                                    <Grid item direction="row" sm={4}>
+                                        <DietCard
+                                            userDietStuff={userDiets}
+                                            signInData={signInData}
+                                            index={index}
+                                            setUserDietData={setUserDietData}
+                                            userGeneratedDiets={userGeneratedDiets}
+                                            setUserGeneratedDiets={setUserGeneratedDiets}
+                                            setdietModalIsOpen={setdietModalIsOpen}
+                                            deleteDietClicked={setdeleteDietClicked}
+                                        />
+                                    </Grid>
+                                )
+                            })}
+                            {/* </div> */}
+                        </Grid>
+                    </div>
+                ) : (
+                    <div> go log in </div>
+                )}
+                
+            </TabPanel>
