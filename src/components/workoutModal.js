@@ -33,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-//change user in line 33 to the add id we used for workout
-//be sure to pass the sign in user id thing to the workout model in nav bar below line 223 signindata  
 
 
 export default function WorkoutModal(props) {
@@ -42,6 +40,7 @@ export default function WorkoutModal(props) {
     const rootRef = React.useRef(null);
     const [modalStyle] = React.useState(getModalStyle);
     const signInData = props.signInData
+
 
     const changeHandler = (event) => {
         const name = event.target.name;
@@ -72,7 +71,7 @@ export default function WorkoutModal(props) {
         }).catch(error => { console.log('in the future add logic to navigate to the error page') });
 
 
-        // console.log(params, "params")
+
         console.log(props.userGeneratedWorkout, "props.userGeneratedWorkout")
     }
 
@@ -116,8 +115,9 @@ export default function WorkoutModal(props) {
                                     sets: "",
                                     reps: "",
                                     time: ""
-                            
+
                                 })
+                                props.setSavedWorkoutClicked(props.workOutUserData[0]?.id || null)
                             }}>
                             Save New Workout
                         </Button>

@@ -33,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-//change user in line 33 to the add id we used for workout
-//be sure to pass the sign in user id thing to the workout model in nav bar below line 223 signindata  
-
 
 export default function DietModal(props) {
     const classes = useStyles();
@@ -115,7 +112,7 @@ export default function DietModal(props) {
                                     calories: ""
                                 })
                             }}>
-                            Save New Workout
+                            Save New Diet
                         </Button>
                         <Button
                             onClick={() => {

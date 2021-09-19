@@ -3,8 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
 import axios from 'axios';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import Input from '@material-ui/core/Input';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -12,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: '300px'
     },
     form: {
-        // display: 'flex'
+
     },
     popover: {
 
@@ -32,23 +38,11 @@ const SignInPopover = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
 
-    //added setIsOpen to try and get the windown to close after clicking the sign in or up
+
     const [buttonClickedValue, setButtonClickedValue] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(null);
 
-    //idea to close popover on submit
-    //     state = {
-    //         open: false
-    //     }
-    //     this.setState({
-    //         open: true,
-    //         anchorEl: event.currentTarget,
-    //     });
-    // };
-
-    // const refreshPage = () => {
-    //     localStorage.clear();
-    // }
+    const [showPassword, setShowPassword] = React.useState(false);
 
     const signInButtonAction = () => {
         setIsOpen(true)
@@ -60,16 +54,6 @@ const SignInPopover = (props) => {
         setIsOpen(true)
         setButtonClickedValue('Sign Up')
     }
-    // const logOutSubmitHandler = () => {
-    //     // setIsOpen(null)
-    //     setButtonClickedValue('Log out')
-    // }
-    //another attment at getting the window to close
-
-    // const logOutButtonAction = () => {
-    //     setIsOpen(true)
-    //     setButtonClickedValue('Log Out')
-    // }
 
     const handleClick = (event) => {
         setIsOpen(true)
@@ -81,7 +65,6 @@ const SignInPopover = (props) => {
         setAnchorEl(null);
     };
 
-    //isOpen
     const open = Boolean(anchorEl)
     const id = open ? 'simple-popover' : undefined;
     console.log('buttonClickedValue', buttonClickedValue)
@@ -103,7 +86,7 @@ const SignInPopover = (props) => {
         }).catch(error => { console.log('in the future add logic to navigate to the error page') });
 
     }
-    //added log out function
+
     const logOutSubmitHandler = () => {
         localStorage.clear();
         window.location.href = 'http://localhost:3000';
@@ -117,11 +100,32 @@ const SignInPopover = (props) => {
                     <div>
                         <form className={classes.form} noValidate autoComplete="off">
                             <TextField name='email' id="outlined-basic" label="Email" variant="outlined" onChange={(ev) => changeHandler(ev)} />
-                            <TextField name='password' id="outlined-basic" label="Password" variant="outlined" onChange={(ev) => changeHandler(ev)} />
+                            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="standard-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+
+                                    name='password'
+                                    onChange={(ev) => changeHandler(ev)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                onMouseDown={(ev) => ev.preventDefault()}
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+
                         </form>
                         <Button onClick={() => {
                             signInSubmitHandler()
-                            // refreshPage()
+
                             setIsOpen(false)
                             setButtonClickedValue('Log Out')
                         }} variant="outlined" color="secondary">Log In</Button>
@@ -135,11 +139,32 @@ const SignInPopover = (props) => {
                             <TextField className={classes.textField} name='firstName' id="outlined-basic" label="First Name" variant="outlined" onChange={(ev) => changeHandler(ev)} />
                             <TextField className={classes.textField} name='lastName' id="outlined-basic" label="Last Name" variant="outlined" onChange={(ev) => changeHandler(ev)} />
                             <TextField className={classes.textField} name='email' id="outlined-basic" label="Email" variant="outlined" onChange={(ev) => changeHandler(ev)} />
-                            <TextField className={classes.textField} name='password' id="outlined-basic" label="Password" variant="outlined" onChange={(ev) => changeHandler(ev)} />
+                            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="standard-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    // value={password}
+                                    name='password'
+                                    onChange={(ev) => changeHandler(ev)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                onMouseDown={(ev) => ev.preventDefault()}
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+
                         </form>
                         <Button onClick={() => {
                             signUpSubmitHandler()
-                            // close popover
+
                             setIsOpen(false)
                             setButtonClickedValue(null)
                         }} variant="outlined" color="secondary">Sign Up</Button>
@@ -151,7 +176,7 @@ const SignInPopover = (props) => {
                     <div>
                         <Button onClick={() => {
                             logOutSubmitHandler()
-                            // setButtonClickedValue('Log out')
+
                         }} variant="outlined" color="secondary">LogOut</Button>
                     </div>
 

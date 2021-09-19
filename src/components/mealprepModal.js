@@ -54,7 +54,7 @@ export default function MealPrepModal(props) {
     }
 
 
-    // console.log('userGeneratedMealPrep', props.userGeneratedMealPrep)
+
     const formValues = props.userGeneratedMealPrep
 
     console.log("MEAL PREP BY ID3", props.userGeneratedMealPrep)
@@ -70,7 +70,7 @@ export default function MealPrepModal(props) {
         }).catch(error => { console.log('in the future add logic to navigate to the error page') });
 
 
-        // console.log(params, "params")
+
         console.log(props.userGeneratedMealPrep, "props.userGeneratedMealPrep")
     }
 

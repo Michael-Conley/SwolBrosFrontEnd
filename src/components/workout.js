@@ -38,7 +38,6 @@ export default function WorkOutCard(props) {
     console.log(props.workoutData, "props.workoutData");
 
     return (
-        // <Grid container spacing={2} xs={12} >
 
         <Card id={props.index} className={classes.root}>
             <CardContent>
@@ -95,20 +94,7 @@ export default function WorkOutCard(props) {
                 </Button>
             </CardActions>
         </Card>
-        // </Grid>
-        // </Grid >
+
     );
 }
 
-
-
-
-    // console.log('props.workoutCardId', props.workoutCardId)
-    // React.useEffect(() => {
-    //     // if (userWorkoutInfo.id != null) {
-    //     axios.post('http://localhost:8080/workoutbyworkoutid', { params: { id: 1 } }).then(response => {
-    //         setFromValues(response.data)
-    //         console.log('workoutbyworkoutid', response.data)
-    //     }).catch(error => { console.log('in the future add logic to navigate to the error page') });
-    //     // }
-    // }, [props.workoutModalIsOpen])

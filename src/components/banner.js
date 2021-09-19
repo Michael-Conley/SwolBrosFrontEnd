@@ -46,6 +46,8 @@ function Banner(props) {
                                     setworkoutModalIsOpen={props.setworkoutModalIsOpen}
                                     signInData={props.signInData}
                                     user={props.user}
+                                    setSavedWorkoutClicked={props.setSavedWorkoutClicked}
+                                    workOutUserData={props.workOutUserData}
                                 />
                                 <CardActions>
                                     <Button variant="contained" color="primary" onClick={() => {

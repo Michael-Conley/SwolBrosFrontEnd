@@ -10,9 +10,7 @@ import SignInPopover from './signInPopover';
 import axios from 'axios';
 import Banner from './banner'
 
-// Component is living in each of the tabs below line 60s
-// knows what panel it is from the index of tha panel
-// role material ui, hidden checks to see if the value and index match
+
 const TabPanel = (props) => {
     const { children, value, index } = props;
 
@@ -32,7 +30,7 @@ const TabPanel = (props) => {
         </div>
     );
 }
-//css for makeing the cards -makestyles build in function
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -41,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         display: 'flex',
-        // height: '10vh'
+
         zIndex: '7'
 
     },
@@ -73,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     },
     gridContainer: {
         display: 'flex',
-        // width:
+
         height: '90vh',
         paddingLeft: '10vw',
         width: '100vw',
@@ -100,6 +98,7 @@ const NavBar = (props) => {
     const [deleteWorkoutClicked, setdeleteWorkoutClicked] = React.useState(null)
     const [deleteDietClicked, setdeleteDietClicked] = React.useState(null)
     const [deleteMealPrepClicked, setdeleteMealPrepClicked] = React.useState(null)
+    const [savedWorkoutClicked, setSavedWorkoutClicked] = React.useState(null)
     const userWorkoutInfo = props.workoutData;
     const userMealPrepInfo = props.mealPrepData;
     const userDietInfo = props.userDietData;
@@ -143,11 +142,12 @@ const NavBar = (props) => {
         }).catch(error => { console.log('in the future add logic to navigate to the error page') });
 
     }
-    //put a conditional statment to show empty when not logged in
+
     React.useEffect(() => {
         if (signInData) {
             if (value === 1) {
                 axios.get('http://localhost:8080/workoutByUserId', { params: { id: signInData.id } }).then(response => {
+                    console.log('workout user by id response', response.data)
                     setUserWorkoutData(response.data)
                 }).catch(error => { console.log(error, 'in the future add logic to navigate to the error page') });
             }
@@ -164,20 +164,15 @@ const NavBar = (props) => {
                 }).catch(error => { console.log(error, 'in the future add logic to navigate to the error page') });
             }
         }
-        // use effect are helpful when you need components to re-render or updated based on a change you just made
-        // in the below brackets are the triggers that will force the code above to run again (each time one of these changes)
-        // once you make a diet and meal prep modal youll need to add those to this list
+
     },
-        [value, workoutModalIsOpen, dietModalIsOpen, MealPrepModalIsOpen, deleteWorkoutClicked, deleteDietClicked, deleteMealPrepClicked]
+        [value, workoutModalIsOpen, dietModalIsOpen, MealPrepModalIsOpen, deleteWorkoutClicked, deleteDietClicked, deleteMealPrepClicked, savedWorkoutClicked]
 
     )
 
 
 
-    //items on the tab will go in the tabpanel on line 61 from
-    // the parent above
-    // console.log(signInData, "sign in data");
-    // console.log(userDietData, "userDietData");
+
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.appBar}>
@@ -216,6 +211,7 @@ const NavBar = (props) => {
                     setdeleteWorkoutClicked={setdeleteWorkoutClicked}
                     workOutUserData={workOutUserData}
                     classes={classes}
+                    setSavedWorkoutClicked={setSavedWorkoutClicked}
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>

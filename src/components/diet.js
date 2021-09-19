@@ -29,11 +29,6 @@ const useStyles = makeStyles({
 });
 
 
-// const DietCard = (props) => {
-//     const classes = useStyles();
-//     const userDietInfo = props.userDietStuff;
-//     const signInData = props.signInData
-//     console.log('props', props)
 
 export default function DietCard(props) {
     const classes = useStyles();
@@ -98,4 +93,3 @@ export default function DietCard(props) {
         </Card>
     );
 }
-//  export default DietCard
